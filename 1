@@ -1,0 +1,245 @@
+-- Изменяем таблицу Bicycle
+-- меняем тип цены на decimal, чтобы можно было указывать копейки
+ALTER TABLE Bicycle
+ALTER COLUMN RentPrice DECIMAL(10,2) NOT NULL;
+
+-- добавляем статус велосипеда
+ALTER TABLE Bicycle
+ADD Status VARCHAR(20) NOT NULL;
+
+-- увеличиваем длину имени, 10 мало
+ALTER TABLE Client
+ALTER COLUMN Name VARCHAR(50) NOT NULL;
+
+-- Таблица Detail
+-- цена с копейками
+ALTER TABLE Detail
+ALTER COLUMN Price DECIMAL(10,2) NOT NULL;
+
+-- добавляем колонку количество
+ALTER TABLE Detail
+ADD Quantity INT NOT NULL;
+
+-- Таблица Staff
+-- увеличиваем длину имени
+ALTER TABLE Staff
+ALTER COLUMN Name VARCHAR(50) NOT NULL;
+
+-- добавляем должность и зарплату
+ALTER TABLE Staff
+ADD Position VARCHAR(50) NOT NULL;
+
+ALTER TABLE Staff
+ADD Salary DECIMAL(10,2) NULL;
+
+-- Таблица ServiceBook
+-- добавляем id, чтобы каждая запись имела свой номер
+ALTER TABLE ServiceBook
+ADD Id INT IDENTITY(1,1) PRIMARY KEY;
+
+-- цена работы в decimal
+ALTER TABLE ServiceBook
+ALTER COLUMN Price DECIMAL(10,2) NOT NULL;
+
+-- добавляем колонку общей суммы аренды
+ALTER TABLE RentBook
+ADD TotalPrice DECIMAL(10,2) NULL; 
+
+
+
+
+
+
+
+
+
+INSERT INTO Bicycle (Brand, RentPrice, Status)
+VALUES
+('Trek Marlin 7', 2500.00, 'Available'),
+('Giant Talon 2', 2700.00, 'Rented'),
+('Specialized Rockhopper', 3100.00, 'Repair'),
+('Cube Aim Pro', 2300.00, 'Available'),
+('Scott Scale 970', 2900.00, 'Available'),
+('Merida Big Nine', 2600.00, 'Rented'),
+('Cannondale Trail 7', 2750.00, 'Available'),
+('Author Basic', 1900.00, 'Available'),
+('GT Avalanche', 3000.00, 'Repair'),
+('Forward Apache', 2100.00, 'Available'),
+('Format 1414', 2500.00, 'Available'),
+('Stels Navigator', 2200.00, 'Rented'),
+('Cube Attention', 2850.00, 'Repair'),
+('Norco Storm', 2600.00, 'Available'),
+('Polygon Xtrada 6', 3100.00, 'Available'),
+('Kellys Spider 30', 2400.00, 'Available'),
+('Author A-Matrix', 2000.00, 'Rented'),
+('Fuji Nevada 1.9', 2700.00, 'Available'),
+('Scott Aspect 960', 2900.00, 'Available'),
+('Giant ATX', 2650.00, 'Repair');
+
+INSERT INTO Client (Name, Passport, [Phone number], Country)
+VALUES
+('Aidos', 'KZ1234567', '87011234567', 'Kazakhstan'),
+('Marat', 'KZ7654321', '87027654321', 'Kazakhstan'),
+('Elena', 'RU1122334', '89991234567', 'Russia'),
+('Diana', 'KZ9988776', '87775556644', 'Kazakhstan'),
+('Alex', 'US4455667', '12024567890', 'USA'),
+('Murat', 'KZ2223334', '87074569812', 'Kazakhstan'),
+('Zhanna', 'KZ3332221', '87084551234', 'Kazakhstan'),
+('Olga', 'RU5566778', '89995432211', 'Russia'),
+('Timur', 'KZ8877665', '87773334455', 'Kazakhstan'),
+('Aruzhan', 'KZ4455667', '87775552233', 'Kazakhstan'),
+('Sergey', 'RU7788990', '89998887766', 'Russia'),
+('Madina', 'KZ1122445', '87019998877', 'Kazakhstan'),
+('John', 'US9911223', '12024567788', 'USA'),
+('Aliya', 'KZ5544332', '87056677890', 'Kazakhstan'),
+('Yermek', 'KZ2211443', '87078889900', 'Kazakhstan'),
+('Victoria', 'RU2211777', '89997776655', 'Russia'),
+('Sanzhar', 'KZ1199223', '87087776655', 'Kazakhstan'),
+('Daniel', 'US1177334', '12028884455', 'USA'),
+('Karina', 'KZ7733445', '87093334455', 'Kazakhstan'),
+('Bota', 'KZ6677889', '87097778899', 'Kazakhstan');
+
+INSERT INTO Staff (Name, Passport, [Date], Position, Salary)
+VALUES
+('Nurlan', 'ST1122334', '2022-05-10', 'Mechanic', 250000.00),
+('Aigerim', 'ST2233445', '2023-03-15', 'Administrator', 300000.00),
+('Bekzat', 'ST3344556', '2021-07-22', 'Mechanic', 280000.00),
+('Serik', 'ST4455667', '2020-10-01', 'Manager', 350000.00),
+('Dana', 'ST5566778', '2024-01-18', 'Cleaner', 180000.00),
+('Ayan', 'ST6677889', '2023-07-10', 'Mechanic', 260000.00),
+('Samat', 'ST7788990', '2021-04-05', 'Cashier', 240000.00),
+('Assel', 'ST8899001', '2022-12-11', 'Administrator', 310000.00),
+('Miras', 'ST9900112', '2023-02-20', 'Mechanic', 270000.00),
+('Aidana', 'ST1011223', '2024-05-25', 'Receptionist', 220000.00),
+('Dias', 'ST1111223', '2023-09-14', 'Mechanic', 255000.00),
+('Gulnara', 'ST1222334', '2024-01-20', 'Administrator', 305000.00),
+('Talgat', 'ST1333445', '2022-06-01', 'Mechanic', 275000.00),
+('Anel', 'ST1444556', '2021-09-12', 'Cashier', 245000.00),
+('Yernar', 'ST1555667', '2020-03-18', 'Manager', 355000.00);
+
+INSERT INTO Detail (Brand, Type, Name, Price, Quantity)
+VALUES
+('Shimano', 'Chain', 'CN-HG71', 8000.50, 15),
+('SRAM', 'Brake', 'Level T', 12000.00, 10),
+('KMC', 'Chain', 'X9', 9500.75, 25),
+('Maxxis', 'Tire', 'Ikon 29"', 15000.00, 18),
+('Bontrager', 'Seat', 'Arvada Comp', 11000.00, 8),
+('Continental', 'Tire', 'Race King', 16500.00, 20),
+('Tektro', 'Brake', 'M285', 10000.00, 15),
+('SRAM', 'Gear', 'NX 12-speed', 18000.00, 10),
+('Shimano', 'Pedal', 'PD-M520', 9000.00, 12),
+('WTB', 'Handlebar', 'Trail 31.8', 13000.00, 7),
+('FSA', 'Crank', 'Gamma Pro', 21000.00, 6),
+('RockShox', 'Fork', 'Recon RL', 34000.00, 5),
+('SRAM', 'Shifter', 'GX Eagle', 23000.00, 8),
+('Shimano', 'Derailleur', 'Deore M4120', 19000.00, 10),
+('Schwalbe', 'Tube', 'SV19', 6000.00, 30),
+('KMC', 'Chain', 'X10', 9800.00, 25),
+('Tektro', 'Disc', 'TR160-24', 8500.00, 12),
+('Maxxis', 'Tire', 'Minion DHF', 17000.00, 10),
+('Bontrager', 'Seatpost', 'Comp 27.2', 12500.00, 9),
+('Shimano', 'Brake', 'MT200', 11000.00, 14);
+
+INSERT INTO ServiceBook (BicycleId, DetailId, [Date], Price, StaffId)
+VALUES
+(1, 1, '2024-03-10', 12000.00, 1),
+(2, 2, '2024-04-15', 15000.00, 3),
+(3, 3, '2024-05-20', 18000.00, 6),
+(4, 4, '2024-06-25', 22000.00, 1),
+(5, 5, '2024-07-05', 16000.00, 9),
+(6, 6, '2024-08-10', 19000.00, 3),
+(7, 7, '2024-09-01', 20000.00, 1),
+(8, 8, '2024-10-12', 24000.00, 6),
+(9, 9, '2024-11-18', 17500.00, 9),
+(10, 10, '2024-12-28', 18500.00, 3),
+(11, 11, '2025-01-10', 25000.00, 13),
+(12, 12, '2025-02-15', 27000.00, 11),
+(13, 13, '2025-03-20', 30000.00, 6),
+(14, 14, '2025-04-10', 21000.00, 1),
+(15, 15, '2025-05-05', 19000.00, 9),
+(16, 16, '2025-06-01', 23000.00, 3),
+(17, 17, '2025-07-15', 24000.00, 6),
+(18, 18, '2025-08-02', 26000.00, 13),
+(19, 19, '2025-09-12', 28000.00, 1),
+(20, 20, '2025-10-03', 31000.00, 9);
+
+INSERT INTO RentBook ([Date], [Time], [Paid], BicycleId, ClientId, StaffId, TotalPrice)
+VALUES
+('2025-01-05', 4, 1, 1, 1, 2, 10000.00),
+('2025-01-06', 5, 1, 2, 2, 3, 13500.00),
+('2025-01-07', 6, 0, 3, 3, 1, 18600.00),
+('2025-01-08', 3, 1, 4, 4, 2, 6900.00),
+('2025-01-09', 7, 1, 5, 5, 6, 20300.00),
+('2025-01-10', 8, 0, 6, 6, 3, 20800.00),
+('2025-01-11', 2, 1, 7, 7, 1, 5500.00),
+('2025-01-12', 9, 1, 8, 8, 6, 17100.00),
+('2025-01-13', 5, 0, 9, 9, 3, 15000.00),
+('2025-01-14', 4, 1, 10, 10, 1, 8400.00),
+('2025-01-15', 6, 1, 11, 11, 9, 15000.00),
+('2025-01-16', 8, 1, 12, 12, 3, 17600.00),
+('2025-01-17', 3, 0, 13, 13, 2, 8550.00),
+('2025-01-18', 10, 1, 14, 14, 1, 26000.00),
+('2025-01-19', 9, 1, 15, 15, 3, 27900.00),
+('2025-01-20', 2, 0, 16, 16, 6, 4800.00),
+('2025-01-21', 7, 1, 17, 17, 9, 14000.00),
+('2025-01-22', 8, 1, 18, 18, 1, 21600.00),
+('2025-01-23', 6, 1, 19, 19, 3, 17400.00),
+('2025-01-24', 5, 0, 20, 20, 6, 13250.00);
+
+
+
+SELECT 
+    b.Brand,
+    SUM(ISNULL(rb.TotalPrice, 0)) AS TotalRevenue,
+    SUM(ISNULL(sb.Price, 0)) AS TotalRepairCost,
+    SUM(ISNULL(rb.TotalPrice, 0)) - SUM(ISNULL(sb.Price, 0)) AS Profit
+FROM Bicycle b
+LEFT JOIN RentBook rb ON b.Id = rb.BicycleId
+LEFT JOIN ServiceBook sb ON b.Id = sb.BicycleId
+GROUP BY b.Brand
+ORDER BY Profit DESC;
+Зачем: показывает, какие велосипеды самые выгодные — помогает решить, какие модели закупать больше.
+
+SELECT 
+    c.Country,
+    COUNT(rb.Id) AS RentCount,
+    SUM(rb.TotalPrice) AS TotalRevenue,
+    AVG(rb.TotalPrice) AS AvgCheck
+FROM Client c
+JOIN RentBook rb ON c.Id = rb.ClientId
+GROUP BY c.Country
+ORDER BY TotalRevenue DESC;
+🧠 Зачем: можно понять, где стоит больше рекламировать прокат или открывать новые точки аренды.
+
+SELECT 
+    s.Name,
+    s.Position,
+    COUNT(rb.Id) AS RentCount,
+    SUM(rb.TotalPrice) AS TotalRevenue
+FROM Staff s
+LEFT JOIN RentBook rb ON s.Id = rb.StaffId
+GROUP BY s.Name, s.Position
+ORDER BY TotalRevenue DESC;
+🧠 Зачем: можно использовать для KPI — кто из сотрудников работает эффективнее, а кто меньше приносит прибыли.
+
+SELECT 
+    b.Brand,
+    AVG(rb.TotalPrice) AS AvgRentPrice,
+    AVG(sb.Price) AS AvgRepairPrice
+FROM Bicycle b
+LEFT JOIN RentBook rb ON b.Id = rb.BicycleId
+LEFT JOIN ServiceBook sb ON b.Id = sb.BicycleId
+GROUP BY b.Brand
+ORDER BY AvgRentPrice DESC;
+🧠 Зачем: помогает определить, какие бренды приносят больше прибыли, а какие требуют дорогого обслуживания.
+
+SELECT TOP 5
+    b.Brand AS BicycleName,
+    b.Status,
+    SUM(r.TotalPrice) AS TotalRevenue,
+    AVG(b.RentPrice) AS AvgRentPrice
+FROM Bicycle b
+JOIN RentBook r ON b.Id = r.BicycleId
+GROUP BY b.Brand, b.Status
+ORDER BY TotalRevenue DESC;
+🚲 1. Топ-5 самых прибыльных велосипедов
